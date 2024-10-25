@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/05/17 11:57:35 by fmacau            #+#    #+#             */
+/*   Updated: 2024/05/20 20:44:43 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "../../includes/fractol.h"
-
-double	ft_strod(int i, double n, double t, char *str)
+char	*ft_strchr(const char *s, int c)
 {
-	int	decimal;
+	int	s_len;
 
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
+	s_len = ft_strlen(s);
+	while (s_len >= 0)
 	{
-		if (str[i] == '-')
-			t = -1;
-		i++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+		s_len--;
 	}
-	while (str[i])
-	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
-		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
-		}
-		i++;
-	}
-	return (t * n);
+	return (NULL);
 }

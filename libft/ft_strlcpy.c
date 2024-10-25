@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/05/16 12:59:27 by fmacau            #+#    #+#             */
+/*   Updated: 2024/05/17 11:52:36 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+// #include <stdio.h>
+// #include <string.h>
 
-#include "../../includes/fractol.h"
-
-double	ft_strod(int i, double n, double t, char *str)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	int	decimal;
+	size_t	i;
 
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
+	i = 0;
+	if (!dest && !src)
 	{
-		if (str[i] == '-')
-			t = -1;
-		i++;
+		return (0);
 	}
-	while (str[i])
+	if (size > 0)
 	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
+		while (i < size - 1 && src[i])
 		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
+			dest[i] = src[i];
+			i++;
 		}
-		i++;
+		dest[i] = '\0';
 	}
-	return (t * n);
+	return (ft_strlen(src));
 }

@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/05/16 11:03:11 by fmacau            #+#    #+#             */
+/*   Updated: 2024/05/17 11:44:42 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "../../includes/fractol.h"
-
-double	ft_strod(int i, double n, double t, char *str)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	int	decimal;
+	char	*temp_dest;
+	char	*temp_src;
+	size_t	i;
 
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
+	i = 0;
+	temp_dest = (char *)dest;
+	temp_src = (char *)src;
+	if (!dest && !src)
+		return (dest);
+	if (temp_dest > temp_src)
 	{
-		if (str[i] == '-')
-			t = -1;
-		i++;
-	}
-	while (str[i])
-	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
+		while (len-- > 0)
 		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
+			*(temp_dest + len) = *(temp_src + len);
 		}
-		i++;
 	}
-	return (t * n);
+	else
+	{
+		while (i < len)
+		{
+			temp_dest[i] = temp_src[i];
+			i++;
+		}
+	}
+	return (dest);
 }

@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/05/20 20:09:57 by fmacau            #+#    #+#             */
+/*   Updated: 2024/05/20 20:10:27 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fractol.h"
+#include "libft.h"
 
-double	ft_strod(int i, double n, double t, char *str)
+int	ft_memcmp(void const *s1, void const *s2, size_t n)
 {
-	int	decimal;
-
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
+	while (n--)
 	{
-		if (str[i] == '-')
-			t = -1;
-		i++;
+		if (*(unsigned char *)s1 != *(unsigned char *)s2)
+			return (*(unsigned char *)s1 - *(unsigned char *)s2);
+		s1 = (unsigned char *)s1 + 1;
+		s2 = (unsigned char *)s2 + 1;
 	}
-	while (str[i])
-	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
-		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
-		}
-		i++;
-	}
-	return (t * n);
+	return (0);
 }

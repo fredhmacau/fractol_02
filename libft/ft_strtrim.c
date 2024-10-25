@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/05/20 18:46:48 by fmacau            #+#    #+#             */
+/*   Updated: 2024/05/20 20:28:55 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fractol.h"
+#include "libft.h"
 
-double	ft_strod(int i, double n, double t, char *str)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	decimal;
+	size_t	len;
+	char	*result;
 
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			t = -1;
-		i++;
-	}
-	while (str[i])
-	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
-		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
-		}
-		i++;
-	}
-	return (t * n);
+	while (*s1 && ft_strchr(set, *s1) != 0)
+		s1++;
+	len = ft_strlen(s1);
+	while (len && s1[len - 1] && ft_strchr(set, s1[len - 1]) != 0)
+		len--;
+	result = (char *)malloc(sizeof(char) * (len + 1));
+	if (!result)
+		return (0);
+	ft_memcpy(result, s1, len);
+	result[len] = '\0';
+	return (result);
 }

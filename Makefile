@@ -6,7 +6,7 @@
 #    By: fmacau <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/20 18:05:51 by fmacau            #+#    #+#              #
-#    Updated: 2024/10/20 18:05:53 by fmacau           ###   ########.fr        #
+#    Updated: 2024/10/25 20:53:14 by fmacau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,14 @@ MINILIBX = minilibx-linux/
 
 EXTRAFLAGS = -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-SRC = srcs/fractol.c \
-	# srcs/ft_draw_julia.c \
-	# srcs/ft_draw_pixel.c \
-	# srcs/ft_get_color.c \
-	# srcs/ft_init_fractol.c \
-	# srcs/ft_print_help.c \
-	# srcs/ft_strod.c \
+SRC = src/fractol.c \
+	src/utils/ft_print_help.c \
+	src/ft_fractol_init.c \
+	src/ft_render.c \
+	src/utils/ft_scale.c \
+	src/ft_events.c \
+	src/utils/ft_strod.c \
+	src/utils/ft_check_params.c \
 
 OBJ = $(SRC:.o=.c)
 
@@ -39,16 +40,14 @@ $(NAME): $(OBJ)
 		@make -sC $(LIBFT)
 		@chmod 777 $(MINILIBX)/./configure
 		@make -sC $(MINILIBX)
-		$(CC) $(FLAGS) $(OBJ) -Lminilibx-linux $(EXTRAFLAGS) -o $(NAME)
+		$(CC) $(FLAGS) $(OBJ) -Lminilibx-linux $(EXTRAFLAGS) -o $(NAME) -L libft/ -lft
 
 clean: 
 		${RM} ${OBJ_1} ${OBJ_2} ${NAME}
 		@cd ${LIBFT} && ${MAKE} clean
-		@cd $(MINILIBX) && &(MAKE) clean
 
 fclean: clean
 		${RM} ${NAME}
 		@cd ${LIBFT} && ${MAKE} fclean
-		@cd $(MINILIBX) && &(MAKE) fclean
 
 re: fclean all

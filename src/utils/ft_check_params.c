@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_check_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/10/25 18:38:07 by fmacau            #+#    #+#             */
+/*   Updated: 2024/10/25 19:25:20 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fractol.h"
 
-double	ft_strod(int i, double n, double t, char *str)
+void	ft_check_params(char *av)
 {
-	int	decimal;
+	int	i;
+	int	decimal_point_seen;
 
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			t = -1;
+	i = 0;
+	decimal_point_seen = 0;
+	if (av[i] == '+' || av[i] == '-')
 		i++;
-	}
-	while (str[i])
+	while (av[i])
 	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
+		if (av[i] == '.')
 		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
+			if (decimal_point_seen)
+				ft_print_help();
+			decimal_point_seen = 1;
+		}
+		else if (!ft_isdigit(av[i]))
+		{
+			ft_print_help();
 		}
 		i++;
 	}
-	return (t * n);
+	if (i == 0 || (i == 1 && (av[0] == '+' || av[0] == '-')))
+		ft_print_help();
 }

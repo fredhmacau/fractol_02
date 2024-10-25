@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/05/20 15:32:37 by fmacau            #+#    #+#             */
+/*   Updated: 2024/05/20 20:01:13 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fractol.h"
+#include "libft.h"
 
-double	ft_strod(int i, double n, double t, char *str)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	decimal;
+	void	*ptr;
+	size_t	size_max;
 
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			t = -1;
-		i++;
-	}
-	while (str[i])
-	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
-		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
-		}
-		i++;
-	}
-	return (t * n);
+	size_max = 4294967295;
+	if (nmemb == 0 || size == 0)
+		return (malloc(1));
+	if (nmemb > size_max / size)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	ft_bzero(ptr, size * nmemb);
+	return (ptr);
 }

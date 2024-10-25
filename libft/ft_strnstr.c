@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/05/20 13:24:25 by fmacau            #+#    #+#             */
+/*   Updated: 2024/05/20 20:27:01 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "../../includes/fractol.h"
-
-double	ft_strod(int i, double n, double t, char *str)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int	decimal;
+	size_t	j;
 
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
+	if (!big && !len)
+		return (NULL);
+	if (!*little)
+		return ((char *)big);
+	while (*big && len--)
 	{
-		if (str[i] == '-')
-			t = -1;
-		i++;
-	}
-	while (str[i])
-	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
+		j = 0;
+		while (*(big + j) == *(little + j) && *(little + j) && j <= len)
 		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
+			if (!*(little + j + 1))
+				return ((char *)big);
+			j++;
 		}
-		i++;
+		big++;
 	}
-	return (t * n);
+	return (NULL);
 }

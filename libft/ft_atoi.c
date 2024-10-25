@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/05/20 14:25:45 by fmacau            #+#    #+#             */
+/*   Updated: 2024/10/16 08:41:33 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "../../includes/fractol.h"
-
-double	ft_strod(int i, double n, double t, char *str)
+long	ft_atoi(const char *nptr)
 {
-	int	decimal;
+	long	n;
+	long	i;
+	int		sign;
 
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
+	i = 0;
+	sign = 1;
+	n = 0;
+	while (((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32) && nptr[i])
+		i++;
+	if (nptr[i] == '-')
 	{
-		if (str[i] == '-')
-			t = -1;
+		sign = -1;
 		i++;
 	}
-	while (str[i])
+	else if (nptr[i] == '+')
+		i++;
+	while ((nptr[i] >= '0' && nptr[i] <= '9') && nptr[i])
 	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
-		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
-		}
+		n = n * 10 + (nptr[i] - '0');
 		i++;
 	}
-	return (t * n);
+	return (n * sign);
 }

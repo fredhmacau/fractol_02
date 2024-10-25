@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strod.c                                         :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmacau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 15:59:54 by fmacau            #+#    #+#             */
-/*   Updated: 2024/10/25 19:06:39 by fmacau           ###   ########.fr       */
+/*   Created: 2024/05/17 13:35:05 by fmacau            #+#    #+#             */
+/*   Updated: 2024/05/17 13:54:25 by fmacau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fractol.h"
+#include "libft.h"
 
-double	ft_strod(int i, double n, double t, char *str)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	decimal;
+	size_t	i;
 
-	decimal = 0;
-	if (str[i] == '+' || str[i] == '-')
+	i = 0;
+	while ((s1[i] || s2[i]) && i < n)
 	{
-		if (str[i] == '-')
-			t = -1;
-		i++;
-	}
-	while (str[i])
-	{
-		if (str[i] == '.')
-			decimal = 1;
-		if (str[i] >= '0' && str[i] <= '9')
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
 		{
-			if (decimal == 1)
-				t /= 10.00;
-			n = (n * 10.00) + (str[i] - '0');
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 		}
 		i++;
 	}
-	return (t * n);
+	return (0);
 }
